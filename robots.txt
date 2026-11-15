@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://carolinaoil.co/sitemap.xml
