@@ -22,6 +22,8 @@
     <a href="used-cooking-oil-pickup-greensboro-nc.html">Oil Pickup</a>
     <a href="grease-trap-cleaning-greensboro-nc.html">Grease Traps</a>
     <a href="index.html#coverage">Coverage</a>
+    <a href="index.html#calculator">Rebate Calculator</a>
+    <a href="index.html#quote">Get a Quote</a>
     <a href="index.html#faq">FAQ</a>
     <a class="btn" href="tel:+17432330127">Call (743) 233-0127</a>
   </nav>
@@ -79,14 +81,57 @@
   </div>
 </div></section>
 
-<section><div class="wrap">
+
+<section id="calculator"><div class="wrap">
   <h2>What is your fryer oil <span class="gold">worth?</span></h2>
-  <p class="sub">That oil you have been paying to get rid of — or pouring off for free — is worth money. We pay every quarter, based on how much oil we collect and the market price for used cooking oil. Bigger kitchens earn more. Small kitchens still earn. Call us at (743) 233-0127 and we will tell you straight what your kitchen can expect.</p>
-  <h2 style="margin-top:36px">Built for <span class="gold">inspection day.</span></h2>
+  <p class="sub">That oil you have been paying to get rid of — or pouring off for free — is worth money. Move the sliders and see what a quarter of your oil looks like.</p>
+  <div class="calc">
+    <label for="calc-gal">Oil you go through each week: <span class="val" id="calc-gal-val">90</span> gallons</label>
+    <input type="range" id="calc-gal" min="10" max="500" step="5" value="90">
+    <label for="calc-rate">Rebate rate: <span class="val" id="calc-rate-val">$1.50</span> per gallon</label>
+    <input type="range" id="calc-rate" min="0.25" max="2.50" step="0.05" value="1.50">
+    <label for="calc-type">What kind of kitchen?</label>
+    <select id="calc-type">
+      <option>Sit-down restaurant</option><option>Fast food</option><option>Food truck</option>
+      <option>Catering / commissary</option><option>Hotel / institution</option><option>Other kitchen</option>
+    </select>
+    <label for="calc-freq">Pickup frequency</label>
+    <select id="calc-freq"><option>Weekly</option><option>Every two weeks</option></select>
+    <div class="calc-out">
+      <div class="box"><div class="big" id="calc-qgal">1,170 gal</div><div class="lbl">your oil per quarter</div></div>
+      <div class="box"><div class="big" id="calc-qpay">$1,755</div><div class="lbl">estimated rebate per quarter</div></div>
+      <div class="box"><div class="big" id="calc-ypay">$7,020</div><div class="lbl">estimated rebate per year</div></div>
+    </div>
+    <p class="calc-note">Container size that fits this volume: <strong style="color:#fff" id="calc-tank">200 gal</strong> — placed free, locked, at your door.<br>
+    Rates move with the market, so treat this as an estimate, not a quote. Your real rate is set in writing in your service agreement before you sign anything. Want your real number? Send the form below — or call (743) 233-0127.</p>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  var gal=document.getElementById('calc-gal'), rate=document.getElementById('calc-rate');
+  if(!gal||!rate) return;
+  var galOut=document.getElementById('calc-gal-val'), rateOut=document.getElementById('calc-rate-val');
+  var qGal=document.getElementById('calc-qgal'), qPay=document.getElementById('calc-qpay'),
+      yPay=document.getElementById('calc-ypay'), tank=document.getElementById('calc-tank');
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function run(){
+    var g=parseFloat(gal.value), r=parseFloat(rate.value);
+    galOut.textContent=g; rateOut.textContent='$'+r.toFixed(2);
+    var q=g*13;
+    qGal.textContent=Math.round(q).toLocaleString('en-US')+' gal';
+    qPay.textContent=money(q*r); yPay.textContent=money(q*r*4);
+    tank.textContent = g<=75 ? '120 gal' : (g<=150 ? '200 gal' : (g<=300 ? '300 gal' : '500 gal'));
+  }
+  gal.addEventListener('input',run); rate.addEventListener('input',run); run();
+})();
+</script>
+<section class="alt"><div class="wrap">
+  <h2>Built for <span class="gold">inspection day.</span></h2>
   <p class="sub">Health inspectors and city grease programs ask for paperwork. Every grease trap visit comes with a signed manifest, and your pickup records are kept on file. When an inspector asks, you have proof — not excuses.</p>
 </div></section>
 
-<section class="alt" id="coverage"><div class="wrap">
+<section id="coverage"><div class="wrap">
   <h2>Serving <span class="gold">the Carolinas.</span></h2>
   <p class="sub">Regular routes run weekly and biweekly. Do not see your town? Call us — routes grow where kitchens call.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
@@ -110,6 +155,58 @@
 </div>
 </div></section>
 
+<section class="alt" id="quote"><div class="wrap">
+  <h2>Get your rate <span class="gold">in writing.</span></h2>
+  <p class="sub">Tell us about your kitchen. We will call you back with your rebate rate, your container size, and a start date — in writing, no pressure.</p>
+  <form class="leadform" id="lead-form">
+    <div><label for="lf-name">Your name</label><input id="lf-name" type="text" name="Name" required autocomplete="name"></div>
+    <div><label for="lf-rest">Restaurant / venue name</label><input id="lf-rest" type="text" name="Restaurant" required></div>
+    <div><label for="lf-phone">Phone</label><input id="lf-phone" type="tel" name="Phone" required autocomplete="tel"></div>
+    <div><label for="lf-email">Email</label><input id="lf-email" type="email" name="Email" required autocomplete="email"></div>
+    <div><label for="lf-city">City</label><input type="text" name="City" required placeholder="Greensboro"></div>
+    <div><label for="lf-service">What do you need?</label>
+      <select id="lf-service" name="Service needed">
+        <option>Oil pickup</option><option>Grease trap cleaning</option><option>Both</option>
+      </select></div>
+    <div><label for="lf-vol">How much oil do you go through?</label>
+      <select id="lf-vol" name="Oil volume">
+        <option>Under 25 gal a week</option><option>25-75 gal a week</option><option>75-150 gal a week</option>
+        <option>150-300 gal a week</option><option>Over 300 gal a week</option><option>Not sure</option>
+      </select></div>
+    <div><label for="lf-now">Do you have an oil company now?</label>
+      <select id="lf-now" name="Current provider">
+        <option>Yes - looking to switch</option><option>No - we handle it ourselves</option><option>No - new kitchen</option>
+      </select></div>
+    <div class="full"><label for="lf-msg">Anything else we should know? (optional)</label>
+      <textarea id="lf-msg" name="Message" rows="3" placeholder="Trap size, best time to call, anything like that"></textarea></div>
+    <input type="text" name="_honey" style="display:none">
+    <div class="full"><button class="btn" id="lead-btn" type="submit">Send — get my rate in writing</button></div>
+    <p class="leadform-note full" id="lead-err" style="display:none;color:#ffb3b3">That did not go through. Please call us at (743) 233-0127 and we will take it from there.</p>
+    <p class="leadform-note full">Your details go to our inbox and nowhere else. Prefer to talk? Call (743) 233-0127.</p>
+  </form>
+</div></section>
+
+<script>
+(function(){
+  var f=document.getElementById('lead-form');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('lead-btn'); btn.disabled=true; btn.textContent='Sending...';
+    var data={}; new FormData(f).forEach(function(v,k){ data[k]=v; });
+    data['_subject']='Website lead - carolinaoil.co'; data['_template']='table';
+    fetch('https://formsubmit.co/ajax/info@carolinaoil.co',{
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    }).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(){
+      f.outerHTML='<div class="form-ok">Got it - thank you. We will call you with your rate in writing and a start date. Need us sooner? Call (743) 233-0127.</div>';
+    }).catch(function(){
+      btn.disabled=false; btn.textContent='Send - get my rate in writing';
+      document.getElementById('lead-err').style.display='block';
+    });
+  });
+})();
+</script>
 <div class="cta-band"><div class="wrap">
   <h2>Ready to get paid for your fryer oil?</h2>
   <p>One call sets up your free container and your first pickup. Grease traps too — one vendor for both.</p>

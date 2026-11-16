@@ -22,6 +22,8 @@
     <a href="used-cooking-oil-pickup-greensboro-nc.html">Oil Pickup</a>
     <a href="grease-trap-cleaning-greensboro-nc.html">Grease Traps</a>
     <a href="index.html#coverage">Coverage</a>
+    <a href="index.html#calculator">Rebate Calculator</a>
+    <a href="index.html#quote">Get a Quote</a>
     <a href="index.html#faq">FAQ</a>
     <a class="btn" href="tel:+17432330127">Call (743) 233-0127</a>
   </nav>
@@ -67,6 +69,58 @@
 </div>
 </div></section>
 
+<section class="alt" id="quote"><div class="wrap">
+  <h2>Get your rate <span class="gold">in writing.</span></h2>
+  <p class="sub">Tell us about your kitchen. We will call you back with your rebate rate, your container size, and a start date — in writing, no pressure.</p>
+  <form class="leadform" id="lead-form">
+    <div><label for="lf-name">Your name</label><input id="lf-name" type="text" name="Name" required autocomplete="name"></div>
+    <div><label for="lf-rest">Restaurant / venue name</label><input id="lf-rest" type="text" name="Restaurant" required></div>
+    <div><label for="lf-phone">Phone</label><input id="lf-phone" type="tel" name="Phone" required autocomplete="tel"></div>
+    <div><label for="lf-email">Email</label><input id="lf-email" type="email" name="Email" required autocomplete="email"></div>
+    <div><label for="lf-city">City</label><input type="text" name="City" required value="Winston-Salem"></div>
+    <div><label for="lf-service">What do you need?</label>
+      <select id="lf-service" name="Service needed">
+        <option>Oil pickup</option><option>Grease trap cleaning</option><option>Both</option>
+      </select></div>
+    <div><label for="lf-vol">How much oil do you go through?</label>
+      <select id="lf-vol" name="Oil volume">
+        <option>Under 25 gal a week</option><option>25-75 gal a week</option><option>75-150 gal a week</option>
+        <option>150-300 gal a week</option><option>Over 300 gal a week</option><option>Not sure</option>
+      </select></div>
+    <div><label for="lf-now">Do you have an oil company now?</label>
+      <select id="lf-now" name="Current provider">
+        <option>Yes - looking to switch</option><option>No - we handle it ourselves</option><option>No - new kitchen</option>
+      </select></div>
+    <div class="full"><label for="lf-msg">Anything else we should know? (optional)</label>
+      <textarea id="lf-msg" name="Message" rows="3" placeholder="Trap size, best time to call, anything like that"></textarea></div>
+    <input type="text" name="_honey" style="display:none">
+    <div class="full"><button class="btn" id="lead-btn" type="submit">Send — get my rate in writing</button></div>
+    <p class="leadform-note full" id="lead-err" style="display:none;color:#ffb3b3">That did not go through. Please call us at (743) 233-0127 and we will take it from there.</p>
+    <p class="leadform-note full">Your details go to our inbox and nowhere else. Prefer to talk? Call (743) 233-0127.</p>
+  </form>
+</div></section>
+
+<script>
+(function(){
+  var f=document.getElementById('lead-form');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('lead-btn'); btn.disabled=true; btn.textContent='Sending...';
+    var data={}; new FormData(f).forEach(function(v,k){ data[k]=v; });
+    data['_subject']='Website lead - carolinaoil.co'; data['_template']='table';
+    fetch('https://formsubmit.co/ajax/info@carolinaoil.co',{
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    }).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(){
+      f.outerHTML='<div class="form-ok">Got it - thank you. We will call you with your rate in writing and a start date. Need us sooner? Call (743) 233-0127.</div>';
+    }).catch(function(){
+      btn.disabled=false; btn.textContent='Send - get my rate in writing';
+      document.getElementById('lead-err').style.display='block';
+    });
+  });
+})();
+</script>
 <div class="cta-band"><div class="wrap">
   <h2>Trap due? One call handles it.</h2>
   <p>One call sets up your free container and your first pickup. Grease traps too — one vendor for both.</p>

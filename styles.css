@@ -63,8 +63,25 @@ footer p{color:var(--muted);font-size:15.5px}
 .legal{margin-top:30px;padding-top:18px;border-top:1px solid #1d3a2a;color:#7d8f83;font-size:13.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .cities{columns:2;max-width:760px}
 .cities li{list-style:none;padding:4px 0;color:var(--muted)}
+.calc{background:var(--green3);border:1px solid #1d5238;border-radius:14px;padding:28px}
+.calc label{display:block;color:#fff;font-weight:700;margin:18px 0 8px;font-size:16px}
+.calc label:first-child{margin-top:0}
+.calc input[type=range]{width:100%;accent-color:var(--gold-bright);height:28px}
+.calc select,.leadform input,.leadform select,.leadform textarea{width:100%;background:#fff;color:#101410;border:none;border-radius:8px;padding:12px 14px;font-size:16px;font-family:'Archivo',Arial,sans-serif}
+.calc .val{color:var(--gold-bright);font-family:'Archivo Black',Arial,sans-serif}
+.calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.calc-out .box{background:var(--green);border:1.5px solid var(--gold);border-radius:12px;padding:18px;text-align:center}
+.calc-out .big{font-family:'Archivo Black',Arial,sans-serif;color:var(--gold-bright);font-size:27px;line-height:1.15}
+.calc-out .lbl{color:var(--muted);font-size:14px;margin-top:6px}
+.calc-note{color:var(--muted);font-size:14.5px;margin-top:18px}
+.leadform{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.leadform .full{grid-column:1/-1}
+.leadform label{display:block;color:#fff;font-weight:700;margin-bottom:7px;font-size:15.5px}
+.leadform .btn{border:none;cursor:pointer;width:100%;font-size:17px}
+.leadform-note{color:var(--muted);font-size:14.5px;margin-top:14px}
+.form-ok{background:var(--green3);border:1.5px solid var(--gold);border-radius:12px;padding:22px;color:#fff;font-size:17px}
 @media(max-width:820px){
-  .cards,.steps,.foot{grid-template-columns:1fr}
+  .cards,.steps,.foot,.calc-out,.leadform{grid-template-columns:1fr}
   .hero h1{font-size:33px}
   .nav nav{display:none}
   .cities{columns:1}
